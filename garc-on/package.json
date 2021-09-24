@@ -1,0 +1,22 @@
+{
+  "name": "appbd",
+  "version": "1.0.0",
+  "description": "integrar com mysql",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Milene",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "js-yaml": "^4.1.0",
+    "mongodb": "^4.1.2",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
