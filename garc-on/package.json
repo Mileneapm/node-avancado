@@ -4,8 +4,8 @@
   "description": "integrar com mysql",
   "main": "index.js",
   "scripts": {
-    "start": "node index",
-    "dev": "nodemon dev",
+    "start": "SET NODE_ENV=development node index.js",
+    "dev": "SET NODE_ENV=development node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Milene",
@@ -13,7 +13,8 @@
   "dependencies": {
     "express": "^4.17.1",
     "js-yaml": "^4.1.0",
-    "mongodb": "^4.1.2",
+    "mongodb": "^3.6.2",
+    "mongoose": "^6.0.10",
     "mysql": "^2.18.1"
   },
   "devDependencies": {
