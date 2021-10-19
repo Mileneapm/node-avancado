@@ -28,9 +28,9 @@ cardapio com os lanches e pedido.
 ```JSON
 http://localhost:9000/cardapio
 {
-    "nome": "hamburguer",
-    "descricao": "costela com barbecue",
-    "valor": "25,00"
+    "nome": "hamburguer bacon",
+    "descricao": "bacon",
+    "valor": "20"
 }
 
 http://localhost:9000/cliente
