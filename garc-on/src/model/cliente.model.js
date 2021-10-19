@@ -15,7 +15,6 @@ const ClienteSchema = new mongoose.Schema({
   },
   complemento: {
     type: String,
-    default: true,
   }
   //permissoes: {
    // type: Array,
@@ -23,6 +22,6 @@ const ClienteSchema = new mongoose.Schema({
 //}
 });
 
-const User = mongoose.model("cliente", ClienteSchema);
+const Clientes = mongoose.model("clientes", ClienteSchema);
 
-module.exports = User;
+module.exports = Clientes;

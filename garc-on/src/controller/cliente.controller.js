@@ -34,6 +34,17 @@ module.exports = () => {
         res.json(await clienteModel.find({}));
     }
 
+    clienteController.excluir = async (req, res) => {
+      var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+
+        await mongoose.connect(uri);
+
+        await clienteModel.deleteOne({_id:req.body._id}, req.body)
+
+        res.json(req.body)
+        
+    }
+
     return clienteController;
 }
 

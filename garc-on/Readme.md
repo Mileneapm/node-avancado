@@ -35,9 +35,10 @@ http://localhost:9000/cardapio
 
 http://localhost:9000/cliente
 {
-    "nome": "milene",
-    "cpf": "446.794.060-03",
-    "cep": "80730095"
+    "nome": "Giane",
+    "cpf": "07524560287",
+    "cep": "83880000",
+    "complemento": "apto 04"
 }
 
 http://localhost:9000/pedido
