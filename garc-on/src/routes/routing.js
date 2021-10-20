@@ -14,10 +14,7 @@ routing.post('/cardapio', cardapioController.salvar)
 routing.put('/cardapio', cardapioController.alterar)
 routing.delete('/cardapio', cardapioController.excluir)
 
-routing.get('/pedido', pedidoController.listar)
+routing.get('/pedido/:id', pedidoController.listar)
 routing.post('/pedido', pedidoController.salvar)
-routing.put('/pedido', pedidoController.alterar)
-routing.delete('/pedido', pedidoController.excluir)
-
 
 module.exports = routing

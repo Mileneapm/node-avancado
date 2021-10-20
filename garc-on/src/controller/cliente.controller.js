@@ -3,49 +3,49 @@ const clienteModel = require("../model/cliente.model");
 
 module.exports = () => {
 
-    const clienteController = {}
+  const clienteController = {}
 
-    clienteController.salvar = async (req, res) => {
-        var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+  clienteController.salvar = async (req, res) => {
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        await mongoose.connect(uri);
+    await mongoose.connect(uri);
 
-        const cliente = new clienteModel(req.body);
+    const cliente = new clienteModel(req.body);
 
-        res.json(cliente.save())
-    }
+    res.json(cliente.save())
+  }
 
-    clienteController.alterar = async (req, res) => {
-        var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+  clienteController.alterar = async (req, res) => {
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        await mongoose.connect(uri);
+    await mongoose.connect(uri);
 
-        await clienteModel.updateOne({_id:req.body._id}, req.body)
+    await clienteModel.updateOne({ _id: req.body._id }, req.body)
 
-        res.json(req.body)
-    }
+    res.json(req.body)
+  }
 
-    clienteController.listar = async (req, res) => {
-        
-        var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+  clienteController.listar = async (req, res) => {
 
-        await mongoose.connect(uri);
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        res.json(await clienteModel.find({}));
-    }
+    await mongoose.connect(uri);
 
-    clienteController.excluir = async (req, res) => {
-      var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+    res.json(await clienteModel.find({}));
+  }
 
-        await mongoose.connect(uri);
+  clienteController.excluir = async (req, res) => {
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        await clienteModel.deleteOne({_id:req.body._id}, req.body)
+    await mongoose.connect(uri);
 
-        res.json(req.body)
-        
-    }
+    await clienteModel.deleteOne({ _id: req.body._id }, req.body)
 
-    return clienteController;
+    res.json(req.body)
+
+  }
+
+  return clienteController;
 }
 
 
@@ -61,21 +61,21 @@ module.exports = () => {
       clienteDataBase.listar((cliente, err) => {
         if (err) {
           return callback(err)
-      }        
+      }
       res.status(200).json(cliente)
       })
     }
 
     controller.salvar = (req, res, callback) => {
-      const clienteDados = req.body;   
-      
-      if (!clienteDados.cep) {            
+      const clienteDados = req.body;
+
+      if (!clienteDados.cep) {
         throw {httpStatusCode: 400, code: 'ERR001', message: 'cep é obrigatório'};
       }
-      clienteDataBase.salvar(clienteDados, (cliente, err) => {      
+      clienteDataBase.salvar(clienteDados, (cliente, err) => {
           if (err) {
               return callback(err)
-           }         
+           }
         res.json(cliente)
       });
     }

@@ -3,49 +3,49 @@ const cardapioModel = require("../model/cardapio.model");
 
 module.exports = () => {
 
-    const cardapioController = {}
+  const cardapioController = {}
 
-    cardapioController.salvar = async (req, res) => {
-        var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+  cardapioController.salvar = async (req, res) => {
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        await mongoose.connect(uri);
+    await mongoose.connect(uri);
 
-        const cardapio = new cardapioModel(req.body);
+    const cardapio = new cardapioModel(req.body);
 
-        res.json(cardapio.save())
-    }
+    res.json(cardapio.save())
+  }
 
-    cardapioController.alterar = async (req, res) => {
-        var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+  cardapioController.alterar = async (req, res) => {
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        await mongoose.connect(uri);
+    await mongoose.connect(uri);
 
-        await cardapioModel.updateOne({_id:req.body._id}, req.body)
+    await cardapioModel.updateOne({ _id: req.body._id }, req.body)
 
-        res.json(req.body)
-    }
+    res.json(req.body)
+  }
 
-    cardapioController.listar = async (req, res) => {
-        
-        var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+  cardapioController.listar = async (req, res) => {
 
-        await mongoose.connect(uri);
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        res.json(await cardapioModel.find({}));
-    }
+    await mongoose.connect(uri);
 
-    cardapioController.excluir = async (req, res) => {
-      var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
+    res.json(await cardapioModel.find({}));
+  }
 
-        await mongoose.connect(uri);
+  cardapioController.excluir = async (req, res) => {
+    var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-        await cardapioModel.deleteOne({_id:req.body._id}, req.body)
+    await mongoose.connect(uri);
 
-        res.json(req.body)
-        
-    }
+    await cardapioModel.deleteOne({ _id: req.body._id }, req.body)
 
-    return cardapioController;
+    res.json(req.body)
+
+  }
+
+  return cardapioController;
 }
 
 
@@ -61,21 +61,21 @@ module.exports = () => {
       clienteDataBase.listar((cliente, err) => {
         if (err) {
           return callback(err)
-      }        
+      }
       res.status(200).json(cliente)
       })
     }
 
     controller.salvar = (req, res, callback) => {
-      const clienteDados = req.body;   
-      
-      if (!clienteDados.cep) {            
+      const clienteDados = req.body;
+
+      if (!clienteDados.cep) {
         throw {httpStatusCode: 400, code: 'ERR001', message: 'cep é obrigatório'};
       }
-      clienteDataBase.salvar(clienteDados, (cliente, err) => {      
+      clienteDataBase.salvar(clienteDados, (cliente, err) => {
           if (err) {
               return callback(err)
-           }         
+           }
         res.json(cliente)
       });
     }
