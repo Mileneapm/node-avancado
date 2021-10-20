@@ -14,7 +14,20 @@ const PedidoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  status: {
+  _idCliente: {
+    type: String,
+    required: true,
+  }
+});
+
+const Pedido = mongoose.model("pedido", PedidoSchema);
+
+module.exports = Pedido;
+
+//testar id cliente e id pedido
+//somar pedido
+
+/*status: {
     type: String,
     required: true,
   },
@@ -29,12 +42,4 @@ const PedidoSchema = new mongoose.Schema({
   cliente: {
       type: subSchema,
       default: {}
-  }
-});
-
-const Pedido = mongoose.model("pedido", PedidoSchema);
-
-module.exports = Pedido;
-
-//testar id cliente e id pedido
-//somar pedido
+  } */
