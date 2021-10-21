@@ -3,30 +3,9 @@
 > Aplicação backend com NodeJS, para requisição de comida, sendo cadastrado cliente,
 cardapio com os lanches e pedido.
 
-# Tabelas MYSQL garcon
-```SQL
-   CREATE TABLE CARDAPIO (
-        CARDAPIO_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-        NOME VARCHAR(255),
-        DESCRICAO VARCHAR (255),
-        VALOR DECIMAL(5,2)
-        );
-
-   CREATE TABLE CLIENTE (
-        CLIENTE_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-        NOME VARCHAR(255),
-        CEP VARCHAR(8)
-        );
-
-    CREATE TABLE PEDIDO (
-        PEDIDO_ID INTEGER PRIMARY KEY AUTO_INCREMENT,
-        CLIENTE_ID INT,
-        CARDAPIO_ID INT
-        );
-
-
 ```JSON
 http://localhost:9000/cardapio
+
 {
     "nome": "hamburguer bacon",
     "descricao": "bacon",
@@ -34,6 +13,7 @@ http://localhost:9000/cardapio
 }
 
 http://localhost:9000/cliente
+
 {
     "nome": "Giane",
     "cpf": "07524560287",
@@ -41,8 +21,11 @@ http://localhost:9000/cliente
     "complemento": "apto 04"
 }
 
-http://localhost:9000/pedido
+GET http://localhost:9000/pedido
+POST http://localhost:9000/pedido/:6170611deaa39742874d1f7f
+
 {
-    "cliente_id": "1",
-    "cardapio_id":"1"
+    "_idCliente": "61705adfecfb1464aef26155",
+    "valor": "10",
+    "nummesa": "1"
 }
