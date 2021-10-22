@@ -1,9 +1,8 @@
 const express = require('express')
 const yaml = require('js-yaml')
 const fs = require('fs')
-//const mongoose = require("mongoose");
 
-var env = process.env.NODE_ENV || 'dev';
+const usuarioController = require('./controller/usuario.controller')()
 
   try {
     let fileContents = fs.readFileSync('./config/host.yaml', 'utf8');
@@ -21,43 +20,35 @@ var env = process.env.NODE_ENV || 'dev';
 
   app.use(routing) 
 
+  
+  function validarToken(req, res, next) {
+    var token = req.headers['token'];
+  
+    if (!token) {
+      return res.status(401).json({ autenticacao: false, message: 'É necessário enviar o token.', code: 'ERR001' });
+    }
+  
+    jwt.verify(token, 'userToken', function (err, payload) {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ autenticacao: false, message: err.message, code: 'ERR002' });
+      }
+  
+      // se tudo estiver ok, salva no request para uso posterior
+      console.log(payload.user)
+  
+      req.user = payload.user
+  
+      next();
+    });
+  }
+  
+  app.use(validarToken, routing)
+  
+  app.use(function (err, req, res, next) {
+    res.status(err.httpStatusCode || 500).json({ code: err.code, message: err.message })
+  });
+  
   app.listen(port, () => {
     console.log(`http://localhost:${port}`)
   })
-
-
-/*
-async function testarMongoose() {
-
-  var uri = "mongodb://milene:12345@cluster0-shard-00-00.662hk.mongodb.net:27017,cluster0-shard-00-01.662hk.mongodb.net:27017,cluster0-shard-00-02.662hk.mongodb.net:27017/garcon?ssl=true&replicaSet=atlas-gr7imv-shard-0&authSource=admin&retryWrites=true&w=majority";
-
-  await mongoose.connect(uri);
-
-  const clienteModel = require("./model/cliente.model");
-
-  const cliente = new clienteModel({ nome: 'Giane', cpf: 26, cep: 83880000, complemento: "apto 04" });
-  
-  cliente.save();
-
-}
-
-testarMongoose();
-
-
-
-
-  
-  var repository = require('./dataBase/repository')()
-
-  async function testarMongoDb() {
-
-    var client = await repository.conectar();
-
-    const collectionCliente = client.db("garcon").collection("cliente");
-
-    await collectionCliente.insertOne({ nome: 'Martins', idade: 22 })
-
-}
-
-testarMongoDb();
-  */ 

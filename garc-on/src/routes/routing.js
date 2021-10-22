@@ -1,8 +1,12 @@
 const routing = require('express').Router();
 
+var usuarioController = require('../controller/usuario.controller')()
 var clienteController = require('../controller/cliente.controller')()
 var cardapioController = require('../controller/cardapio.controller')()
 var pedidoController = require('../controller/pedido.controller')()
+
+routing.get('/usuario', usuarioController.listar)
+routing.post('/usuario', usuarioController.salvar)
 
 routing.get('/cliente', clienteController.listar)
 routing.post('/cliente', clienteController.salvar)

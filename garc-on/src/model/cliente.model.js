@@ -16,10 +16,6 @@ const ClienteSchema = new mongoose.Schema({
   complemento: {
     type: String,
   }
-  //permissoes: {
-   // type: Array,
-   // default: {}
-//}
 });
 
 const Clientes = mongoose.model("clientes", ClienteSchema);
