@@ -48,7 +48,16 @@ const usuarioController = require('./controller/usuario.controller')()
   app.use(function (err, req, res, next) {
     res.status(err.httpStatusCode || 500).json({ code: err.code, message: err.message })
   });
+
+  app.get('/download/:nomeArquivo', async (req, res) => {
+    const { nomeArquivo } = req.params
   
+    let readStream = fs.createReadStream('./uploads/' + nomeArquivo)
+  
+    readStream.on('open', function () {
+      readStream.pipe(res)
+    });
+  })
   app.listen(port, () => {
     console.log(`http://localhost:${port}`)
   })
