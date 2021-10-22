@@ -4,8 +4,8 @@
   "description": "integrar com mysql",
   "main": "index.js",
   "scripts": {
-    "start": "SET NODE_ENV=development node index.js",
-    "dev": "SET NODE_ENV=development node index.js",
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Milene",

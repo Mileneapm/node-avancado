@@ -5,7 +5,7 @@ const fs = require('fs')
 const usuarioController = require('./controller/usuario.controller')()
 
   try {
-    let fileContents = fs.readFileSync('./config/host.yaml', 'utf8');
+    let fileContents = fs.readFileSync('./src/config/host.yaml', 'utf8');
     data = yaml.load(fileContents);
       } catch (e) {
         console.log(e);
@@ -33,8 +33,7 @@ const usuarioController = require('./controller/usuario.controller')()
         console.log(err)
         return res.status(500).json({ autenticacao: false, message: err.message, code: 'ERR002' });
       }
-  
-      // se tudo estiver ok, salva no request para uso posterior
+
       console.log(payload.user)
   
       req.user = payload.user
@@ -49,7 +48,7 @@ const usuarioController = require('./controller/usuario.controller')()
     res.status(err.httpStatusCode || 500).json({ code: err.code, message: err.message })
   });
 
-  app.get('/download/:nomeArquivo', async (req, res) => {
+ /* app.get('/download/:nomeArquivo', async (req, res) => {
     const { nomeArquivo } = req.params
   
     let readStream = fs.createReadStream('./uploads/' + nomeArquivo)
@@ -57,7 +56,8 @@ const usuarioController = require('./controller/usuario.controller')()
     readStream.on('open', function () {
       readStream.pipe(res)
     });
-  })
+  })*/
+
   app.listen(port, () => {
     console.log(`http://localhost:${port}`)
   })
